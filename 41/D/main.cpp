@@ -12,7 +12,7 @@ int main()
     int n, m;
     while (scanf("%d %d", &n, &m) == 2) {
         getchar();
-        vector< pair<int, int> > p;
+        vector<pair<int, int>> p;
 
         int maxn[10000] = {0};
         int minn[10000];
