@@ -1,2 +1,5 @@
 *.o
 *.cpp.orig
+*.cpp~
+*.txt~
+*.swp
