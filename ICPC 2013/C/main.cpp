@@ -4,12 +4,18 @@
 #include <climits>
 
 /*
-If you change everything to long long int, you get TLE!!
+1.If you change everything to long long int, you get TLE!!
+
+2. Use inline function can SAVE 0.5 seconds!!!
+
+clang-format-3.7 -i -style=LLVM main.cpp
+&& astyle --style=linux main.cpp
+&& g++ -Wall -Wextra -o main.o main.cpp
 */
 
 using namespace std;
 
-long long int check(int n1, int w1, int n2, int w2, int n3, int w3)
+inline long long int check(int n1, int w1, int n2, int w2, int n3, int w3)
 {
     return (long long int)n1 * w1 + (long long int)n2 * w2 +
            (long long int)n3 * w3;
