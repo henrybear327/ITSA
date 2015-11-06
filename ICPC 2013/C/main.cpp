@@ -3,6 +3,10 @@
 #include <algorithm>
 #include <climits>
 
+/*
+If you change everything to long long int, you get TLE!!
+*/
+
 using namespace std;
 
 long long int check(int n1, int w1, int n2, int w2, int n3, int w3)
