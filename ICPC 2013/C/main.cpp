@@ -38,10 +38,11 @@ int main()
 
         while (right < n) {
             while (left < right) {
-                if (left >= (right - left) && (right - left) >= (n - right))
+                if (left >= (right - left) && (right - left) >= (n - right)) {
                     ans = min(ans, check(left, inp[left - 1], right - left,
                                          inp[right - 1] - inp[left - 1], n - right,
                                          inp[n - 1] - inp[right - 1]));
+                }
 
                 // printf("%d\n", ans);
                 left++;
