@@ -33,7 +33,7 @@ int main()
         for (int i = 1; i < n; i++)
             inp[i] += inp[i - 1];
 
-        int left = n / 3 - 1, right = 2 * (n / 3) - 1;
+        int left = n / 3, right = 2 * (n / 3);
         long long int ans = LLONG_MAX;
 
         while (right < n) {
@@ -48,7 +48,7 @@ int main()
                 left++;
             }
             right++;
-            left = n / 3 - 1;
+            left = n / 3;
         }
 
         printf("%lld\n", ans);
