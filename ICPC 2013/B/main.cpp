@@ -67,6 +67,7 @@ int main()
         }
 
         if (n == 1 || (seq[0].type != seq[1].type && seq[3].type != seq[0].type)) {
+            // n == 1 this case doesn't matter
             printf("-1\n");
             continue;
         }
