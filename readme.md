@@ -12,3 +12,4 @@ stupid mistake.
 
 * Think of `long long int` before coding.
 * use `scanf("%s", input)` when there is no spaces in the string. Mix usage of `fgets` and `scanf` will have `\n` problem
+* UVa 11988: when using global variables, don't forget to INITIALIZE it before starting reading in new test cases!!
