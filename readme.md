@@ -11,6 +11,7 @@ stupid mistake.
 # Common pitfalls
 
 * Think of `long long int` before coding.
-* use `scanf("%s", input)` when there is no spaces in the string. Mix usage of `fgets` and `scanf` will have `\n` problem
+* Use `scanf("%s", input)` when there is no spaces in the string. Mix usage of `fgets` and `scanf` will have `\n` problem.
+* `scanf()` > `fgets()`
 * UVa 11988: when using global variables, don't forget to INITIALIZE it before starting reading in new test cases!!
 * Test the special cases, such as 0, -1, 1, or max_value, before even submitting the code.
