@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <queue>
+#include <climits>
 #include <algorithm>
 
 using namespace std;
@@ -9,75 +10,57 @@ using namespace std;
 int node, start, endd, mid;
 bool map[110][110];
 
-int min_dist;
-
-typedef struct info {
-    int step, cnt;
-    bool lock;
-} Info;
-
-Info visited[110];
-
-void bfs()
+int visited[110];
+int step[110];
+int bfs()
 {
     memset(visited, 0, sizeof(visited));
+    for (int i = 0; i < 110; i++)
+        step[i] = INT_MAX;
 
-    visited[start].cnt = 1;
+    queue<int> q[2];
 
-    queue<int> q;
-    q.push(start);
+    int q_idx = 0;
+    q[q_idx].push(start);
+    step[start] = 0;
 
-    while (!q.empty()) {
-        int curr = q.front();
-        // printf("curr pop %d\n", curr);
+    bool target_reached = false;
+    while (q[q_idx].empty() == false) {
+        int curr = q[q_idx].front();
+        q[q_idx].pop();
 
-        q.pop();
-        // printf("curr %d %d %d\n", curr, visited[curr].cnt, visited[curr].step);
+        visited[curr] = 1;
 
-        for (int i = 0; i < node; i++) {
-            if (visited[curr].lock == false && visited[i].lock == false &&
-                map[curr][i] == true) {
-                // printf("i %d %d %d\n", i, visited[i].cnt, visited[i].step);
-                if (visited[i].cnt == 0) {
-                    visited[i].cnt = visited[curr].cnt;
-                    visited[i].step = visited[curr].step + 1;
-                } else if (visited[i].step == visited[curr].step + 1) {
-                    visited[i].cnt += visited[curr].cnt;
-                } else if (visited[i].step > visited[curr].step) {
-                    visited[i].cnt = visited[curr].cnt;
-                    visited[i].step = visited[curr].step + 1;
+        int next_q_idx = q_idx == 1 ? 0 : 1;
+        for (int i = 1; i <= node; i++) {
+            if (visited[i] == 0 && map[curr][i] == true &&
+                step[curr] + 1 <= step[i]) {
+                if (i == endd) {
+                    target_reached = true;
                 }
-                q.push(i);
-                // printf("ii %d %d %d\n", i, visited[i].cnt, visited[i].step);
+                q[next_q_idx].push(i);
+                step[i] = step[curr] + 1;
             }
         }
-        visited[curr].lock = true;
-    }
-}
-int mid_ans, total_ans;
-/*
-void dfs(int curr, int v[], int step)
-{
-    if (step == min_dist) {
-        if (curr == endd) {
-            if (v[mid] == 1) {
-                mid_ans++;
+
+        if (q[q_idx].empty() == true) {
+            q_idx = next_q_idx;
+            if (target_reached) {
+                int cnt = 0;
+                while (q[q_idx].empty() == false) {
+                    if (q[q_idx].front() == endd) {
+                        cnt++;
+                    }
+                    q[q_idx].pop();
+                }
+
+                return cnt;
             }
-            total_ans++;
-        }
-
-        return;
-    }
-
-    for (int i = 0; i < node; i++) {
-        if (v[i] == 0 && map[curr][i] == true) {
-            v[i] = 1;
-            dfs(i, v, step + 1);
-            v[i] = 0;
         }
     }
+
+    return 0;
 }
-*/
 
 int main()
 {
@@ -86,12 +69,9 @@ int main()
 
     while (ncase--) {
         scanf("%d,%d,%d,%d", &node, &start, &endd, &mid);
-        start--;
-        endd--;
-        mid--;
 
-        for (int i = 0; i < node; i++) {
-            for (int j = 0; j < node; j++) {
+        for (int i = 1; i <= node; i++) {
+            for (int j = 1; j <= node; j++) {
                 int tmp;
                 scanf("%d", &tmp);
 
@@ -99,23 +79,17 @@ int main()
             }
         }
 
-        mid_ans = 0;
-        total_ans = 0;
+        int total = bfs();
 
-        bfs();
-        total_ans = visited[endd].cnt;
-
-        int orig_start = start, orig_endd = endd, orig_mid = mid;
+        int orig_endd = endd;
         endd = mid;
-        bfs();
-        int ans = visited[endd].cnt;
+        int pass_mid = bfs();
 
-        start = orig_mid;
+        start = mid;
         endd = orig_endd;
-        bfs();
-        ans *= visited[endd].cnt;
+        pass_mid *= bfs();
 
-        printf("%d %d\n", total_ans, ans);
+        printf("%d %d\n", total, pass_mid);
     }
 
     return 0;
