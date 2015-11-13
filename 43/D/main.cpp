@@ -12,6 +12,8 @@ bool map[110][110];
 
 int visited[110];
 int step[110];
+
+int start_to_mid, mid_to_end, total_dist, state;
 int bfs()
 {
     memset(visited, 0, sizeof(visited));
@@ -25,6 +27,7 @@ int bfs()
     step[start] = 0;
 
     bool target_reached = false;
+    int step_count = 0;
     while (q[q_idx].empty() == false) {
         int curr = q[q_idx].front();
         q[q_idx].pop();
@@ -44,6 +47,7 @@ int bfs()
         }
 
         if (q[q_idx].empty() == true) {
+            step_count++;
             q_idx = next_q_idx;
             if (target_reached) {
                 int cnt = 0;
@@ -54,6 +58,14 @@ int bfs()
                     q[q_idx].pop();
                 }
 
+                switch (state) {
+                case 1:
+                    total_dist = step_count;
+                case 2:
+                    start_to_mid = step_count;
+                case 3:
+                    mid_to_end = step_count;
+                }
                 return cnt;
             }
         }
@@ -79,15 +91,23 @@ int main()
             }
         }
 
+        start_to_mid = mid_to_end = total_dist = 0;
+
+        state = 1;
         int total = bfs();
 
+        state = 2;
         int orig_endd = endd;
         endd = mid;
         int pass_mid = bfs();
 
+        state = 3;
         start = mid;
         endd = orig_endd;
         pass_mid *= bfs();
+
+        if (start_to_mid + mid_to_end > total_dist)
+            pass_mid = 0;
 
         printf("%d %d\n", total, pass_mid);
     }
