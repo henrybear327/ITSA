@@ -15,3 +15,8 @@ stupid mistake.
 * `scanf()` > `fgets()`
 * UVa 11988: when using global variables, don't forget to INITIALIZE it before starting reading in new test cases!!
 * Test the special cases, such as 0, -1, 1, or max_value, before even submitting the code.
+* When using `double`, don't make mistakes like
+  ```
+  int x = 1, y = 2;
+  double s = y / x;
+  ```
