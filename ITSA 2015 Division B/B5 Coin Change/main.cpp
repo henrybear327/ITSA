@@ -1,26 +1,26 @@
 #include <cstdio>
 
-const int c[5] = {1, 5, 10, 20, 50};
+const int coin_avail[5] = {1, 5, 10, 20, 50};
 
 int main()
 {
-    int cases;
-    while (scanf("%d", &cases) == 1) {
-        while (cases--) {
-            long long int target;
-            scanf("%lld", &target);
+    int ncase;
+    scanf("%d", &ncase);
 
-            long long int cnt[15010] = {0};
-            cnt[0] = 1; // If target = 0
+    while (ncase--) {
+        int money;
+        scanf("%d", &money);
 
-            for (int i = 0; i < 5; i++) {
-                for (long long int j = c[i]; j <= target; j++) {
-                    cnt[j] += cnt[j - c[i]];
-                }
+        long long int DP[15100] = {0};
+        DP[0] = 1; // base case
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j + coin_avail[i] <= money; j++) {
+                DP[j + coin_avail[i]] += DP[j];
             }
-
-            printf("%lld\n", cnt[target]);
         }
+
+        printf("%lld\n", DP[money]);
     }
 
     return 0;
