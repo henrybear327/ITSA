@@ -5,24 +5,40 @@ public class Main
 {
     public static void main(String[] args)
     {
-        Scan scan = new Scan();
-        int testcases = Integer.parseInt(scan.nextLine());
-        while (testcases-- != 0) {
-            StringTokenizer input = new StringTokenizer(scan.nextLine());
-            ArrayList<Integer> list = new ArrayList<Integer>();
-            while (input.hasMoreElements())
-                list.add(Integer.parseInt(input.nextToken()));
-            Set<Integer> set = new HashSet<Integer>();
-            int result = 0;
-            for (int i = list.size() - 1; i >= 0; i--) {
-                if (set.contains(list.get(i)))
-                    continue;
-                result += i + 1;
-                set.add(list.get(i));
+        Scan sc = new Scan();
+        out = new PrintWriter(new BufferedOutputStream(System.out));
+
+        int ncase =
+            Integer.parseInt(sc.nextLine()); // Think of scanf("%d", &ncase);
+
+        while (ncase-- != 0) {
+            String test = sc.nextLine();
+            System.err.println("String: " + test);
+
+            StringTokenizer inp = new StringTokenizer(test);
+
+            int[] data = new int[inp.countTokens()];
+            int idx = 0;
+            while (inp.hasMoreElements()) {
+                data[idx++] = Integer.parseInt(inp.nextToken());
             }
-            System.out.println(result);
+
+            int[] cnt = new int[1010];
+            int ans = 0;
+            for (int i = idx - 1; i >= 0; i--) {
+                if (cnt[data[i]] == 0) {
+                    cnt[data[i]] = 1;
+                    ans += i + 1;
+                }
+            }
+
+            out.println(ans);
         }
+        out.close();
     }
+
+    // PrintWriter for faster output
+    public static PrintWriter out;
 }
 
 class Scan
