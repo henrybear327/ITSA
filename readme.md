@@ -20,3 +20,4 @@ stupid mistake.
   int x = 1, y = 2;
   double s = y / x;
   ```
+* Don't get trapped in "I have solved this before!"
