@@ -10,7 +10,7 @@ C =  and the number of tails of these animals
 z = crabs個數 = A - C
 y = chicken個數 = (B - 8 * z - 2 * C) / 2
 x = rabbit個數 = C - y
-所以只要ABC都大於零，且(B - 8 * z - 2 * C) / 2可以整除，且xyz也都大於零，就可了!
+所以只要ABC都>=零，且(B - 8 * z - 2 * C) / 2可以整除，且xyz也都>=零，就可了!
 */
 
 int main()
