@@ -2,12 +2,6 @@
 
 ITSA submission backup.
 
-# Notes for Contest 40
-
-1. Compare function: Don't do ```return a - b``` if a and b are floating point numbers!! (problem B)
-2. Don't use copy paste unless the code is identical! Messed up problem D with this
-stupid mistake.
-
 # Common pitfalls
 
 * Think of `long long int` before coding.
@@ -21,3 +15,6 @@ stupid mistake.
   double s = y / x;
   ```
 * Don't get trapped in "I have solved this before!"
+* Compare function: Don't do ```return a - b``` if a and b are floating point numbers!! (problem B)
+* Don't use copy paste unless the code is identical! Messed up problem D with this
+stupid mistake.
